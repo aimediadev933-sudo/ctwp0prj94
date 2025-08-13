@@ -1,1 +1,1052 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nepal NREN - Exploration of Resources for Research and Education</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #423D9B;
+            --secondary: #6251B5;
+            --secondary-dark: #2D1B47;
+            --orange: #F28C28;
+            --magenta: #E81C64;
+            --dark-teal: #0E4C68;
+            --body: #F2F2F2;
+            --text: #1D1D1B;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--body);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .logos {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 3rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .logo {
+            height: 60px;
+            width: auto;
+            transition: all 0.3s ease;
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .logo:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(255,255,255,0.3);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 1.3rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+
+        .project-info {
+            text-align: center;
+            font-size: 1rem;
+            opacity: 0.8;
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--secondary-dark);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .nav-item {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            background: var(--orange);
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        main {
+            padding: 3rem 0;
+        }
+
+        .section {
+            margin-bottom: 4rem;
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--orange), var(--magenta), var(--primary));
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 50%;
+            height: 3px;
+            background: var(--orange);
+            border-radius: 2px;
+        }
+
+        /* Overview Cards */
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .overview-card {
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .overview-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .overview-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            transform: rotate(45deg);
+            transition: all 0.3s ease;
+        }
+
+        .overview-card:hover::before {
+            transform: rotate(45deg) translate(10px, 10px);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .card-description {
+            position: relative;
+            z-index: 2;
+            opacity: 0.9;
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature-item {
+            background: linear-gradient(135deg, #fff, #f8f9fa);
+            padding: 2rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--orange);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .feature-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .feature-item:nth-child(even) {
+            border-left-color: var(--magenta);
+        }
+
+        .feature-item:nth-child(3n) {
+            border-left-color: var(--primary);
+        }
+
+        .feature-title {
+            color: var(--primary);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        /* Research Areas */
+        .research-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .research-item {
+            background: linear-gradient(135deg, var(--orange), var(--magenta));
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .research-item:hover {
+            transform: scale(1.05);
+        }
+
+        .research-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Global NREN Map */
+        .nren-map {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .nren-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .nren-stat {
+            text-align: center;
+        }
+
+        .nren-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .nren-label {
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        /* Impact Stats */
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .impact-item {
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .impact-item:hover {
+            transform: scale(1.05);
+        }
+
+        .impact-number {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .impact-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Partners */
+        .partners-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .partner-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .partner-card:hover {
+            border-color: var(--orange);
+            transform: translateY(-3px);
+        }
+
+        .partner-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(242, 140, 40, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .partner-card:hover::before {
+            left: 100%;
+        }
+
+        .partner-type {
+            background: var(--primary);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        .local { background: var(--orange); }
+        .singapore { background: var(--magenta); }
+        .china { background: var(--dark-teal); }
+        .japan { background: var(--secondary); }
+
+        /* University Coverage */
+        .university-map {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin: 2rem 0;
+        }
+
+        .coverage-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .coverage-item {
+            text-align: center;
+            padding: 1.5rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+        }
+
+        .coverage-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Challenges */
+        .challenges-list {
+            display: grid;
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .challenge-item {
+            background: linear-gradient(135deg, #fff3f3, #ffe8e8);
+            padding: 2rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--magenta);
+            position: relative;
+        }
+
+        .challenge-title {
+            color: var(--magenta);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Future Directions */
+        .future-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .future-item {
+            background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+            padding: 2rem;
+            border-radius: 12px;
+            border-top: 4px solid var(--dark-teal);
+            transition: transform 0.3s ease;
+        }
+
+        .future-item:hover {
+            transform: scale(1.02);
+        }
+
+        .future-title {
+            color: var(--dark-teal);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        /* SDGs */
+        .sdg-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .sdg-item {
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: 600;
+            transition: transform 0.3s ease;
+        }
+
+        .sdg-item:hover {
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary-dark);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--orange);
+            margin-bottom: 1rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section {
+            animation: fadeInUp 0.6s ease;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .section {
+                padding: 2rem 1rem;
+            }
+            
+            .logos {
+                gap: 1.5rem;
+            }
+            
+            .logo {
+                height: 45px;
+            }
+            
+            .nav-container {
+                gap: 1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-bg"></div>
+        <div class="container">
+            <div class="header-content">
+                <div class="logos">
+                    <img src="images/logos/tein-logo.png" alt="TEIN*CC" class="logo">
+                    <img src="images/logos/asia-connect-logo.png" alt="Asia@Connect" class="logo">
+                    <img src="images/logos/eu-logo.png" alt="European Union" class="logo">
+                </div>
+                <h1>Nepal NREN</h1>
+                <p class="subtitle">Exploration of Resources for Research and Education and Sensitization about NREN</p>
+                <p class="project-info">6 Targeted Call • WP2 • Nepal Initiative</p>
+            </div>
+        </div>
+    </header>
+
+    <nav>
+        <div class="container">
+            <div class="nav-container">
+                <a href="#overview" class="nav-item active">Overview</a>
+                <a href="#objectives" class="nav-item">Objectives</a>
+                <a href="#activities" class="nav-item">Activities</a>
+                <a href="#outcomes" class="nav-item">Outcomes</a>
+                <a href="#partners" class="nav-item">Partners</a>
+                <a href="#challenges" class="nav-item">Challenges</a>
+                <a href="#future" class="nav-item">Future</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div class="container">
+            <section id="overview" class="section">
+                <h2 class="section-title">Project Overview</h2>
+                <p>Based on the findings of a comprehensive feasibility study, this transformative project addressed the critical lack of awareness about National Research and Education Networks (NRENs) among Nepalese universities. Through strategic sensitization sessions, research domain identification, and exploration of global R&E services, the project successfully bridged Nepal's scientific infrastructure gap while expanding NREN's outreach to 7 out of 12 central universities and 1 provincial university.</p>
+                
+                <div class="overview-grid">
+                    <div class="overview-card">
+                        <div class="card-icon">🎓</div>
+                        <h3 class="card-title">University Sensitization</h3>
+                        <p class="card-description">Comprehensive awareness campaigns across Nepal's leading educational institutions</p>
+                    </div>
+                    <div class="overview-card">
+                        <div class="card-icon">🔬</div>
+                        <h3 class="card-title">Research Domain Mapping</h3>
+                        <p class="card-description">Identification of priority research areas with high potential for NREN benefits</p>
+                    </div>
+                    <div class="overview-card">
+                        <div class="card-icon">🌐</div>
+                        <h3 class="card-title">Global NREN Analysis</h3>
+                        <p class="card-description">Comprehensive mapping of 42 global NRENs and their services for benchmarking</p>
+                    </div>
+                    <div class="overview-card">
+                        <div class="card-icon">💻</div>
+                        <h3 class="card-title">HPC Access</h3>
+                        <p class="card-description">Facilitating researcher access to international supercomputing resources</p>
+                    </div>
+                </div>
+
+                <div class="nren-map">
+                    <h3>Global NREN Research Impact</h3>
+                    <p>Comprehensive analysis of international research and education networks</p>
+                    <div class="nren-stats">
+                        <div class="nren-stat">
+                            <div class="nren-number">42</div>
+                            <div class="nren-label">Global NRENs Analyzed</div>
+                        </div>
+                        <div class="nren-stat">
+                            <div class="nren-number">20</div>
+                            <div class="nren-label">Countries with HPC Resources</div>
+                        </div>
+                        <div class="nren-stat">
+                            <div class="nren-number">5</div>
+                            <div class="nren-label">Research Domains Identified</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="objectives" class="section">
+                <h2 class="section-title">Project Objectives</h2>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <h3 class="feature-title">Primary Goal</h3>
+                        <p>Promote awareness and practical use of high-speed research and education networks (RENs) across Nepal's universities and research communities.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3 class="feature-title">NREN Awareness Development</h3>
+                        <p>Develop comprehensive awareness materials tailored to the Nepalese academic context and research priorities.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3 class="feature-title">Research Domain Identification</h3>
+                        <p>Identify key research domains across Nepal with highest potential to benefit from advanced networking infrastructure.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3 class="feature-title">National Sensitization Campaign</h3>
+                        <p>Organize comprehensive sensitization workshops nationwide to build understanding and adoption of NREN services.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3 class="feature-title">Team Capacity Building</h3>
+                        <p>Build team capacity through strategic international exposure visits to leading R&E centers and HPC facilities.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3 class="feature-title">International Collaboration</h3>
+                        <p>Establish partnerships with global NRENs and research centers to expand Nepal's research capabilities.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="activities" class="section">
+                <h2 class="section-title">Key Activities</h2>
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <h3 class="feature-title">Global NREN Services Research</h3>
+                        <p>Comprehensive mapping of activities, services, and resources of 42 global NRENs, including HPC facilities and collaborations, providing valuable insights into international best practices.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3 class="feature-title">Nepal Research Area Mapping</h3>
+                        <p>Identified priority research areas across physical, biological, earth, computer, and health sciences through document review, consultations, and analysis of national trends.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3 class="feature-title">International Capacity Building</h3>
+                        <p>NREN team visited HPC and R&E centers in China, Singapore, and Japan to understand infrastructure operations and potential collaborations for research advancement.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3 class="feature-title">Sensitization Materials Development</h3>
+                        <p>Created comprehensive awareness materials tailored to the Nepalese context, incorporating global REN applications, research domain analyses, and practical benefits.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3 class="feature-title">University Workshops</h3>
+                        <p>Conducted awareness sessions in 9 universities and 2 major APAN55 events, engaging 361 stakeholders and raising awareness about REN and supercomputing benefits.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3 class="feature-title">International Exposure Visits</h3>
+                        <p>Strategic visits to leading research centers in China, Singapore, and Japan for knowledge transfer and collaboration development.</p>
+                    </div>
+                </div>
+
+                <div class="research-grid">
+                    <div class="research-item">
+                        <div class="research-icon">🧬</div>
+                        <h4>Biological Sciences</h4>
+                    </div>
+                    <div class="research-item">
+                        <div class="research-icon">⚛️</div>
+                        <h4>Physical Sciences</h4>
+                    </div>
+                    <div class="research-item">
+                        <div class="research-icon">🌍</div>
+                        <h4>Earth Sciences</h4>
+                    </div>
+                    <div class="research-item">
+                        <div class="research-icon">💻</div>
+                        <h4>Computer Sciences</h4>
+                    </div>
+                    <div class="research-item">
+                        <div class="research-icon">🏥</div>
+                        <h4>Health Sciences</h4>
+                    </div>
+                </div>
+            </section>
+
+            <section id="outcomes" class="section">
+                <h2 class="section-title">Key Outcomes & Impact</h2>
+                
+                <div class="impact-grid">
+                    <div class="impact-item">
+                        <div class="impact-number">361</div>
+                        <div class="impact-label">Participants Engaged</div>
+                    </div>
+                    <div class="impact-item">
+                        <div class="impact-number">58</div>
+                        <div class="impact-label">Institutions Covered</div>
+                    </div>
+                    <div class="impact-item">
+                        <div class="impact-number">9</div>
+                        <div class="impact-label">Universities Reached</div>
+                    </div>
+                    <div class="impact-item">
+                        <div class="impact-number">5</div>
+                        <div class="impact-label">New MoUs Signed</div>
+                    </div>
+                </div>
+
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <h3 class="feature-title">Global NREN Profiling</h3>
+                        <p>Created comprehensive comparative document on services and applications across continents for reference by Nepal and other emerging RENs.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3 class="feature-title">HPC and Scientific Resources Mapping</h3>
+                        <p>Documented access points to HPC, virtual labs, and research infrastructure in 20 countries for future collaborative opportunities.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3 class="feature-title">Nepal Research Domain Identification</h3>
+                        <p>Highlighted disciplines with high potential to benefit from RENs, supporting future resource alignment and strategic planning.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3 class="feature-title">National Awareness Materials</h3>
+                        <p>Developed localized content to educate stakeholders on REN benefits aligned with national research trends and priorities.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3 class="feature-title">University Network Expansion</h3>
+                        <p>NREN established network agreements with four central and one provincial university, expanding reach to five provinces across Nepal.</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3 class="feature-title">HPC Access Achievement</h3>
+                        <p>Tribhuvan University researchers gained access to supercomputing resources via NSCC Singapore, showcasing tangible international collaboration impact.</p>
+                    </div>
+                </div>
+
+                <div class="university-map">
+                    <h3>University Coverage Expansion</h3>
+                    <p>Significant expansion of NREN reach across Nepal's academic landscape</p>
+                    <div class="coverage-stats">
+                        <div class="coverage-item">
+                            <div class="coverage-number">7/12</div>
+                            <div class="coverage-label">Central Universities</div>
+                        </div>
+                        <div class="coverage-item">
+                            <div class="coverage-number">1</div>
+                            <div class="coverage-label">Provincial University</div>
+                        </div>
+                        <div class="coverage-item">
+                            <div class="coverage-number">5</div>
+                            <div class="coverage-label">Provinces Covered</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="partners" class="section">
+                <h2 class="section-title">Partner Organizations</h2>
+                <div class="partners-grid">
+                    <div class="partner-card">
+                        <div class="partner-type local">Lead Organization</div>
+                        <h3>Nepal Research and Education Network (NREN)</h3>
+                        <p>Primary coordinator for Nepal's research and education networking infrastructure development</p>
+                    </div>
+                    <div class="partner-card">
+                        <div class="partner-type singapore">Singapore Partner</div>
+                        <h3>National Supercomputing Center (Singapore)</h3>
+                        <p>HPC resources provider and technical collaboration partner for Nepalese researchers</p>
+                    </div>
+                    <div class="partner-card">
+                        <div class="partner-type china">Chinese Partners</div>
+                        <h3>CNIC, CSTNET, CERNET</h3>
+                        <p>Chinese networking and research institutions providing expertise and collaboration opportunities</p>
+                    </div>
+                    <div class="partner-card">
+                        <div class="partner-type japan">Japanese Partners</div>
+                        <h3>SINET, NICT, MAFFIN, APAN</h3>
+                        <p>Japanese research network consortium providing technical expertise and regional collaboration</p>
+                    </div>
+                    <div class="partner-card">
+                        <div class="partner-type singapore">Singapore NREN</div>
+                        <h3>SingAREN</h3>
+                        <p>Singapore's Advanced Research and Education Network facilitating regional research connections</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="challenges" class="section">
+                <h2 class="section-title">Challenges & Gaps</h2>
+                <div class="challenges-list">
+                    <div class="challenge-item">
+                        <h3 class="challenge-title">Limited Internet Infrastructure at Campuses</h3>
+                        <p>Universities outside Kathmandu lacked sufficient capacity for live demonstrations, limiting practical exposure during sensitization sessions.</p>
+                    </div>
+                    <div class="challenge-item">
+                        <h3 class="challenge-title">University Coordination Delays</h3>
+                        <p>Scheduling conflicts with academic leadership caused postponements in some sensitization workshops, affecting project timeline efficiency.</p>
+                    </div>
+                    <div class="challenge-item">
+                        <h3 class="challenge-title">Incomplete University Outreach</h3>
+                        <p>Sessions could not be conducted at Purbanchal, Nepal Sanskrit, and Lumbini Buddha Universities during the project timeline, leaving coverage gaps.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="future" class="section">
+                <h2 class="section-title">Future Directions</h2>
+                <div class="future-grid">
+                    <div class="future-item">
+                        <h3 class="future-title">Complete University Coverage</h3>
+                        <p>Plan to visit and conduct comprehensive awareness activities at three uncovered universities to ensure complete national outreach and coverage.</p>
+                    </div>
+                    <div class="future-item">
+                        <h3 class="future-title">Deepen HPC Collaborations</h3>
+                        <p>Strengthen partnerships with NSCC Singapore and China-based centers to expand access for Nepalese researchers across multiple disciplines.</p>
+                    </div>
+                    <div class="future-item">
+                        <h3 class="future-title">Expand REN Coverage</h3>
+                        <p>Connect remaining universities to ensure equitable REN coverage and comprehensive national-level network integration across all provinces.</p>
+                    </div>
+                    <div class="future-item">
+                        <h3 class="future-title">Enhance Local NREN Services</h3>
+                        <p>Use insights from global NRENs to introduce new services and foster advanced academic research capabilities within Nepal's institutions.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section">
+                <h2 class="section-title">Relevant SDGs</h2>
+                <div class="sdg-grid">
+                    <div class="sdg-item">SDG 4: Quality Education</div>
+                    <div class="sdg-item">SDG 9: Industry, Innovation and Infrastructure</div>
+                    <div class="sdg-item">SDG 17: Partnerships for the Goals</div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Project Information</h3>
+                    <p>Nepal NREN Sensitization</p>
+                    <p>6 Targeted Call • WP2</p>
+                    <p>Research & Education Network Development</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Key Partners</h3>
+                    <p>Nepal Research and Education Network</p>
+                    <p>National Supercomputing Center (Singapore)</p>
+                    <p>Regional NREN Consortium</p>
+                </div>
+                <div class="footer-section">
+                    <h3>International Collaboration</h3>
+                    <p>CNIC, CSTNET, CERNET (China)</p>
+                    <p>SINET, NICT, MAFFIN (Japan)</p>
+                    <p>SingAREN (Singapore)</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Research Impact</h3>
+                    <p>42 Global NRENs Analyzed</p>
+                    <p>361 Stakeholders Engaged</p>
+                    <p>5 Research Domains Identified</p>
+                </div>
+            </div>
+            <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; margin-top: 2rem;">
+                <p>&copy; 2024 Nepal NREN Project. Connecting Nepal to Global Research Networks.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+                
+                // Update active nav item
+                document.querySelectorAll('.nav-item').forEach(nav => nav.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Update active nav item on scroll
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('.section');
+            const navItems = document.querySelectorAll('.nav-item');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navItems.forEach(item => {
+                item.classList.remove('active');
+                if (item.getAttribute('href') === `#${current}`) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        // Add animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.feature-item, .partner-card, .challenge-item, .future-item, .research-item, .impact-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Animate statistics
+        function animateStats() {
+            const stats = document.querySelectorAll('.impact-number, .nren-number, .coverage-number');
+            stats.forEach(stat => {
+                const text = stat.textContent;
+                let target = parseInt(text.replace(/[^0-9]/g, ''));
+                
+                // Handle fractions like 7/12
+                if (text.includes('/')) {
+                    const parts = text.split('/');
+                    target = parseInt(parts[0]);
+                }
+                
+                let current = 0;
+                const increment = target / 30;
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        stat.textContent = text;
+                        clearInterval(timer);
+                    } else {
+                        if (text.includes('/')) {
+                            const parts = text.split('/');
+                            stat.textContent = Math.floor(current) + '/' + parts[1];
+                        } else {
+                            stat.textContent = Math.floor(current);
+                        }
+                    }
+                }, 50);
+            });
+        }
+
+        // Trigger stats animation when stats section is visible
+        const statsSection = document.querySelector('.impact-grid');
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateStats();
+                    statsObserver.unobserve(entry.target);
+                }
+            });
+        });
+
+        if (statsSection) {
+            statsObserver.observe(statsSection);
+        }
+
+        // Research domains hover effect
+        document.querySelectorAll('.research-item').forEach((item, index) => {
+            item.style.animationDelay = `${index * 0.1}s`;
+        });
+    </script>
+</body>
+</html>
